@@ -9,7 +9,7 @@ TRANSFORMED_TRAINING_SET_PATH = "./train/transformed_training_set/"
 
 TRAINING_VIDEO_PATH = "./train/output.mp4"
 
-PREDICTED_VIDEO_PATH = "./predict/output.mp4"
+PREDICTED_VIDEO_PATH_LIST = ["./predict/output.mp4"]
 
 BLOCK_NUMBER = 2
 
