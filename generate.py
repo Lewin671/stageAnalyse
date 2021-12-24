@@ -6,4 +6,4 @@ if __name__ == '__main__':
     stable, unstable, res = cutting_video(file_name)
 
     # 把分好类的稳定阶段的图片存本地
-    res.pick_and_save(stable, 100, to_dir=config.TRAINING_SET_PATH, meaningful_name=True)
+    res.pick_and_save(stable, 10, to_dir=config.TRAINING_SET_PATH, meaningful_name=True)
