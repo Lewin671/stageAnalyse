@@ -5,7 +5,7 @@ import uiautomator2
 import logger
 import utils
 
-DEVICE_ID = "e8f9445d"
+DEVICE_ID = "a107cac1"
 PACKAGE_NAME = "com.taobao.taobao"
 video_fp = "./demo.mp4"
 
@@ -13,7 +13,7 @@ video_fp = "./demo.mp4"
 def click(device):
     logger.log("click now")
     device(text="天猫新品").click()
-    time.sleep(3)
+    time.sleep(8)
 
 
 def record_task(file_name):
@@ -22,18 +22,15 @@ def record_task(file_name):
     device.app_start(PACKAGE_NAME, wait=True, stop=True)
 
     # wait app to be front
-    device.app_wait(PACKAGE_NAME, front=True)
+    device(text="天猫新品").wait(timeout=30)
     logger.log("App come to the front")
-
-    # wait 3s to make it stable
-    device.app_wait(PACKAGE_NAME, timeout=3)
     logger.log("ready to click button")
 
     # record clicking
     raw_file_name = "./video/raw_" + file_name
     file_name = "./video/" + file_name
     utils.run_with_recording(lambda: click(device), raw_file_name)
-    utils.cmd('ffmpeg -r 60 -i ' + raw_file_name + " " + file_name).wait()
+    utils.cmd('ffmpeg -i ' + raw_file_name + " " + file_name).wait()
 
 
 if __name__ == '__main__':
