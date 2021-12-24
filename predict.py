@@ -1,10 +1,10 @@
 import os
 
-from stagesepx.classifier.keras import KerasClassifier
 from stagesepx.reporter import Reporter
 
 import config
 import hooks
+from classifier import Classifier
 from cutter import cutting_video
 
 
@@ -15,7 +15,7 @@ def report_path(file_name: str) -> str:
 
 
 if __name__ == '__main__':
-    classifier = KerasClassifier(target_size=config.TARGET_SIZE)
+    classifier = Classifier(target_size=config.TARGET_SIZE)
     classifier.load_model(config.MODEL_PATH)
     for hook in hooks.HOOKS:
         classifier.add_hook(hook)
@@ -53,3 +53,7 @@ if __name__ == '__main__':
 
                 last_stage_frame = current_stage_frame
                 last_stage = current_stage
+
+        startTime = classify_result.last('0').timestamp
+        endTime = classify_result.first(sorted(result_dict.keys())[-1]).timestamp
+        print("total costs " + str(endTime - startTime) + "s")
