@@ -4,7 +4,9 @@ from stagesepx.classifier.keras import KerasClassifier
 from stagesepx.reporter import Reporter
 
 import config
+import hooks
 from cutter import cutting_video
+
 
 def report_path(file_name: str) -> str:
     head, child = os.path.split(file_name)
@@ -13,8 +15,10 @@ def report_path(file_name: str) -> str:
 
 
 if __name__ == '__main__':
-    classifier = KerasClassifier()
+    classifier = KerasClassifier(target_size=config.TARGET_SIZE)
     classifier.load_model(config.MODEL_PATH)
+    for hook in hooks.HOOKS:
+        classifier.add_hook(hook)
 
     report_dir_path = "./report"
     if not os.path.isdir(report_dir_path):
@@ -23,7 +27,7 @@ if __name__ == '__main__':
     for file_name in config.PREDICTED_VIDEO_PATH_LIST:
         stable, unstable, _ = cutting_video(file_name)
 
-        classify_result = classifier.classify(file_name, stable, keep_data=True)
+        classify_result = classifier.classify(file_name, stable, keep_data=False)
         result_dict = classify_result.to_dict()
 
         # 写html报告

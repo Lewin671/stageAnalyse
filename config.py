@@ -19,4 +19,4 @@ OFFSET = 3
 
 MODEL_PATH = "./model.h5"
 
-
+TARGET_SIZE = (360, 640)
