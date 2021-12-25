@@ -5,7 +5,7 @@ import uiautomator2
 import logger
 import utils
 
-DEVICE_ID = "a107cac1"
+DEVICE_ID = "e8f9445d"
 PACKAGE_NAME = "com.taobao.taobao"
 video_fp = "./demo.mp4"
 
@@ -30,7 +30,7 @@ def record_task(output_file_path: str):
     raw_file_name = "./video/raw_" + output_file_path
     output_file_path = "./video/" + output_file_path
     utils.run_with_recording(lambda: click(device), raw_file_name)
-    utils.cmd('ffmpeg -i ' + raw_file_name + " " + output_file_path).wait()
+    utils.cmd('ffmpeg -y -i ' + raw_file_name + " " + output_file_path).wait()
 
 
 if __name__ == '__main__':
