@@ -31,3 +31,11 @@ OFFSET = 3
 MODEL_PATH = "./model.h5"
 
 TARGET_SIZE = (360, 640)
+
+# automation related
+
+DEVICE_ID = "e8f9445d"
+
+PACKAGE_NAME = "com.taobao.taobao"
+
+TEST_TIMES = 20

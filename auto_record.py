@@ -2,12 +2,9 @@ import time
 
 import uiautomator2
 
+import config
 import logger
 import utils
-
-DEVICE_ID = "e8f9445d"
-PACKAGE_NAME = "com.taobao.taobao"
-video_fp = "./demo.mp4"
 
 
 def click(device):
@@ -17,9 +14,9 @@ def click(device):
 
 
 def record_task(output_file_path: str):
-    device = uiautomator2.connect(DEVICE_ID)
+    device = uiautomator2.connect(config.DEVICE_ID)
     logger.log("Device Info", device.info)
-    device.app_start(PACKAGE_NAME, wait=True, stop=True)
+    device.app_start(config.PACKAGE_NAME, wait=True, stop=True)
 
     # wait app to be front
     device(text="天猫新品").wait(timeout=30)
